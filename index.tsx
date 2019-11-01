@@ -41,6 +41,7 @@ function TodoInput({ todo }: Props) {
 
   return (
     <input
+      autoFocus
       value={text}
       onChange={e => {
         setText(e.target.value);
