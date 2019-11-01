@@ -1,0 +1,22 @@
+{
+  "name": "hello-mobx",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kazuma1989/hello-mobx.git",
+  "author": "kazuma1989 <kazuma.ebina@quipper.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel ./index.html"
+  },
+  "dependencies": {
+    "mobx": "^5.14.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^3.6.4"
+  }
+}
