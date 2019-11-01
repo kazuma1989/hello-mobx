@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "node",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "strictNullChecks": true
+
+    "strictNullChecks": true,
+    "experimentalDecorators": true
   }
 }
