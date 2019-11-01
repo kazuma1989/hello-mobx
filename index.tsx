@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import ReactDOM from "react-dom";
 import { observer } from "mobx-react";
 import { Todo } from "./Todo";
@@ -16,9 +16,9 @@ class TodoViewerClassComp extends React.Component<Props> {
   }
 }
 
-const TodoViewerFuncComp = observer(function TodoViewerFuncComp({
-  todo
-}: Props) {
+const TodoViewerFuncComp = observer(function TodoViewerFuncComp() {
+  const todo = useTodo();
+
   return <div>{todo.title}</div>;
 });
 
@@ -56,13 +56,17 @@ function App({ todo }: Props) {
 
       <TodoInput todo={todo} />
       <TodoViewerClassComp todo={todo} />
-      <TodoViewerFuncComp todo={todo} />
+      <TodoViewerFuncComp />
       <TodoViewBadParent todo={todo} />
     </div>
   );
 }
 
-const { Provider, Consumer } = createContext(new Todo());
+const todoContext = createContext(new Todo());
+const { Provider, Consumer } = todoContext;
+function useTodo() {
+  return useContext(todoContext);
+}
 
 ReactDOM.render(
   <Provider value={new Todo()}>
