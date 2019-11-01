@@ -1,21 +1,7 @@
 import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
-import { observable } from "mobx";
 import { observer } from "mobx-react";
-
-class Todo {
-  id = Math.random();
-
-  @observable _title = "";
-  get title() {
-    return this._title;
-  }
-  set title(value: string) {
-    this._title = value.toUpperCase();
-  }
-
-  @observable finished = false;
-}
+import { Todo } from "./Todo";
 
 type Props = {
   todo: Todo;
