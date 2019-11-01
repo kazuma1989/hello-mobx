@@ -5,7 +5,15 @@ import { observer } from "mobx-react";
 
 class Todo {
   id = Math.random();
-  @observable title = "";
+
+  @observable _title = "";
+  get title() {
+    return this._title;
+  }
+  set title(value: string) {
+    this._title = value.toUpperCase();
+  }
+
   @observable finished = false;
 }
 
