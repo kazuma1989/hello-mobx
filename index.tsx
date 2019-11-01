@@ -22,6 +22,18 @@ const TodoViewerFuncComp = observer(function TodoViewerFuncComp({
   return <div>{todo.title}</div>;
 });
 
+const TodoViewBadParent = observer(function TodoViewBadParent({ todo }: Props) {
+  // It works but depends on `console.log`.
+  // See what will happen if you comment out the line.
+  console.log(todo.title);
+
+  return <TodoViewChild todo={todo} />;
+});
+
+const TodoViewChild = function TodoViewChild({ todo }: Props) {
+  return <div>{todo.title}</div>;
+};
+
 function TodoInput({ todo }: Props) {
   const [text, setText] = useState("");
 
@@ -45,6 +57,7 @@ function App({ todo }: Props) {
       <TodoInput todo={todo} />
       <TodoViewerClassComp todo={todo} />
       <TodoViewerFuncComp todo={todo} />
+      <TodoViewBadParent todo={todo} />
     </div>
   );
 }
