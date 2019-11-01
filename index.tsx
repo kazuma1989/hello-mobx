@@ -17,20 +17,26 @@ class Todo {
   @observable finished = false;
 }
 
-const todo = new Todo();
+type Props = {
+  todo: Todo;
+};
 
 @observer
-class TodoViewerClassComp extends React.Component {
+class TodoViewerClassComp extends React.Component<Props> {
   render() {
+    const { todo } = this.props;
+
     return <div>{todo.title}</div>;
   }
 }
 
-const TodoViewerFuncComp = observer(function TodoViewerFuncComp() {
+const TodoViewerFuncComp = observer(function TodoViewerFuncComp({
+  todo
+}: Props) {
   return <div>{todo.title}</div>;
 });
 
-function TodoInput() {
+function TodoInput({ todo }: Props) {
   const [text, setText] = useState("");
 
   return (
@@ -44,16 +50,16 @@ function TodoInput() {
   );
 }
 
-function App() {
+function App({ todo }: Props) {
   return (
     <div>
       <h1>Hello MobX</h1>
 
-      <TodoInput />
-      <TodoViewerClassComp />
-      <TodoViewerFuncComp />
+      <TodoInput todo={todo} />
+      <TodoViewerClassComp todo={todo} />
+      <TodoViewerFuncComp todo={todo} />
     </div>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App todo={new Todo()} />, document.getElementById("app"));
