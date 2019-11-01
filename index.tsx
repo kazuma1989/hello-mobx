@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
@@ -62,4 +62,11 @@ function App({ todo }: Props) {
   );
 }
 
-ReactDOM.render(<App todo={new Todo()} />, document.getElementById("app"));
+const { Provider, Consumer } = createContext(new Todo());
+
+ReactDOM.render(
+  <Provider value={new Todo()}>
+    <Consumer>{todo => <App todo={todo} />}</Consumer>
+  </Provider>,
+  document.getElementById("app")
+);
