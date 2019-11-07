@@ -4,32 +4,46 @@ import { useObserver } from "mobx-react";
 import { Todo } from "./Todo";
 
 // -----
+// hooks/useMobxStore.ts
 // -----
-// https://blog.mselee.com/posts/2019/06/08/using-mobx-with-react-hooks-typescript/
+// Inspired from https://blog.mselee.com/posts/2019/06/08/using-mobx-with-react-hooks-typescript/
 
-function useStoreData<Selection, ContextData, Store>(
-  context: React.Context<ContextData>,
-  storeSelector: (contextData: ContextData) => Store,
-  dataSelector: (store: Store) => Selection
+export type Selector<Store, Selection> = (store: Store) => Selection;
+
+export function useMobxStore<Store, Selection>(
+  context: React.Context<Store>,
+  selector: Selector<Store, Selection>
 ) {
-  const value = useContext(context);
-  if (!value) {
-    throw new Error();
+  const store = useContext(context);
+  if (!store) {
+    throw new Error("need to pass a value to the context");
   }
 
-  const store = storeSelector(value);
-  return useObserver(() => dataSelector(store));
-}
-
-function useRootData<Selection>(dataSelector: (store: TStore) => Selection) {
-  return useStoreData(storeContext, contextData => contextData!, dataSelector);
+  return useObserver(() => selector(store));
 }
 
 // -----
+// stores/Todo.ts
+// -----
+
+// export class Todo {}
+
+// Define Todo store as a class
+// and also define useXxxStore
+const context = createContext<Todo | null>(null);
+
+export const TodoProvider = context.Provider;
+
+export function useTodo<S>(selector: Selector<Todo, S>) {
+  return useMobxStore(context, selector);
+}
+
+// -----
+// components/TodoViewer.tsx
 // -----
 
 function TodoViewer() {
-  const [title, finished, toggleFinished] = useRootData(store => [
+  const [title, finished, toggleFinished] = useTodo(store => [
     store.title,
     store.finished,
     () => (store.finished = !store.finished)
@@ -43,18 +57,19 @@ function TodoViewer() {
   );
 }
 
-type TStore = Todo;
-const storeContext = createContext<Todo | null>(null);
-const { Provider } = storeContext;
+// -----
+// main.tsx
+// -----
 
+// Then bootstrap your app
 const todo = new Todo();
-todo.title = "Do something!!!!!!!!";
+todo.title = "Do something";
 
 function App() {
   return (
-    <Provider value={todo}>
+    <TodoProvider value={todo}>
       <TodoViewer />
-    </Provider>
+    </TodoProvider>
   );
 }
 
