@@ -8,6 +8,9 @@
   "scripts": {
     "start": "parcel ./index.html"
   },
+  "browserslist": [
+    "last 2 chrome versions"
+  ],
   "dependencies": {
     "mobx": "^5.14.2",
     "mobx-react": "^6.1.4",
