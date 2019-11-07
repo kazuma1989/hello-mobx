@@ -66,4 +66,7 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const mountPoint = document.createElement("div");
+document.body.appendChild(mountPoint);
+
+ReactDOM.render(<App />, mountPoint);

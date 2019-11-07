@@ -68,9 +68,12 @@ function useTodo() {
   return useContext(todoContext);
 }
 
+const mountPoint = document.createElement("div");
+document.body.appendChild(mountPoint);
+
 ReactDOM.render(
   <Provider value={new Todo()}>
     <Consumer>{todo => <App todo={todo} />}</Consumer>
   </Provider>,
-  document.getElementById("app")
+  mountPoint
 );
