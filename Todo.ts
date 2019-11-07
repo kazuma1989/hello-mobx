@@ -3,7 +3,7 @@ import { observable } from "mobx";
 export class Todo {
   id = Math.random();
 
-  @observable _title = "";
+  @observable private _title = "";
   get title() {
     return this._title;
   }
