@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext, createContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useObserver } from "mobx-react";
 import { Todo } from "./Todo";
@@ -43,11 +43,25 @@ export function useTodo<S>(selector: Selector<Todo, S>) {
 // -----
 
 function TodoViewer() {
-  const [title, finished, toggleFinished] = useTodo(store => [
+  const [title, finished, toggleFinished, setTitle] = useTodo(store => [
     store.title,
     store.finished,
-    () => (store.finished = !store.finished)
+    () => (store.finished = !store.finished),
+    (title: string) => (store.title = title)
   ]);
+
+  useEffect(() => {
+    let i = 0;
+
+    const timer = setInterval(() => {
+      i += 1;
+      setTitle(`${title} ${i}`);
+    }, 1000);
+
+    return function stop() {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <div onClick={toggleFinished}>
