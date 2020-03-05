@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // Target
+    "target": "ES2019",
+
+    // Required for dynamic import.
+    "module": "ESNext",
+
+    // Some packages need this option.
+    "moduleResolution": "Node",
+
+    // "import React" instead of "import * as React"
+    "allowSyntheticDefaultImports": true,
+
+    // Required for Parcel with JSX.
+    "jsx": "react",
+
+    // Useful type checks.
+    "strictNullChecks": true,
+
+    // Just use tsc as a type-checker
+    "noEmit": true
+  }
+}
