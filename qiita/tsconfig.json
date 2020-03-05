@@ -15,6 +15,9 @@
     // Required for Parcel with JSX.
     "jsx": "react",
 
+    // Enable MobX decorators
+    "experimentalDecorators": true,
+
     // Useful type checks.
     "strictNullChecks": true,
 
