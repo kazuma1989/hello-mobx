@@ -12,15 +12,15 @@
     "last 2 chrome versions"
   ],
   "dependencies": {
-    "mobx": "^5.14.2",
-    "mobx-react": "^6.1.4",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.9.3",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
     "parcel-bundler": "^1.12.4",
-    "typescript": "^3.6.4"
+    "typescript": "^3.8.3"
   }
 }
