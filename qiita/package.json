@@ -12,6 +12,8 @@
     "last 1 Chrome versions"
   ],
   "dependencies": {
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
