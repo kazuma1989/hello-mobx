@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react'
+import { useObserver } from 'mobx-react'
 import { Section, Title, Loading, Todo } from './components'
 import TodosStore from './TodosStore'
 
 const store = new TodosStore()
 
 export default function App() {
-  // store の todos や loading の値が変化したことをコンポーネントは検知できない。
-  const { todos, loading, toggle, fetch: fetchTodos } = store
+  const [todos, loading, toggle, fetchTodos] = useObserver(() => [
+    store.todos,
+    store.loading,
+    store.toggle,
+    store.fetch,
+  ])
 
-  // そのため API から TODO 一覧を取得しても、
   useEffect(() => {
     fetchTodos()
   }, [fetchTodos])
 
-  // ずっと読み込み中表示のまま。
   if (loading) {
     return (
       <Section>
@@ -22,7 +25,6 @@ export default function App() {
     )
   }
 
-  // ここには至らない。
   return (
     <Section>
       <Title>Todos</Title>

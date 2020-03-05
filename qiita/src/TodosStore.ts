@@ -29,12 +29,16 @@ export default class TodosStore {
    * @param id 対象の TODO の ID
    */
   @action.bound toggle(id: number) {
-    this.todos = this.todos.map(todo => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed
-      }
-      return todo
-    })
+    const todo = this.todos.find(t => t.id === id)
+    if (!todo) return
+
+    todo.completed = !todo.completed
+    // this.todos = this.todos.map(todo => {
+    //   if (todo.id === id) {
+    //     todo.completed = !todo.completed
+    //   }
+    //   return todo
+    // })
   }
 
   /**
@@ -43,6 +47,6 @@ export default class TodosStore {
   fetch = flow(function*(this: TodosStore) {
     this.todos = yield fetch(
       'https://jsonplaceholder.typicode.com/todos?userId=1',
-    ).then(r => r.json())
+    ).then(r => r.json()) as any
   }).bind(this)
 }
