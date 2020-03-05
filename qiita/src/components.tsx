@@ -9,7 +9,7 @@ export function Title({ children }: { children?: React.ReactNode }) {
 }
 
 export function Loading() {
-  return <div>Loading...</div>
+  return <p>Loading...</p>
 }
 
 export function Todo({
@@ -22,11 +22,13 @@ export function Todo({
   onChange?(): void
 }) {
   return (
-    <label>
-      <input type="checkbox" checked={completed} onChange={onChange} />
+    <p>
+      <label>
+        <input type="checkbox" checked={completed} onChange={onChange} />
 
-      {completed && '(DONE!) '}
-      {label}
-    </label>
+        {completed && '(DONE!) '}
+        {label}
+      </label>
+    </p>
   )
 }
